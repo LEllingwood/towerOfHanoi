@@ -18,11 +18,13 @@ towers.forEach(function (tower)
 
   })
 let discInHand = null
+resetGrabCursor();
 
 function pickUpDisc(event) {
   const tower = event.currentTarget
   if (tower.childElementCount > 0) {
     discInHand = tower.lastElementChild;
+    setCursorToMove(discInHand);
     tower.removeChild(discInHand)
     for (let i = 0; i < towers.length; i++) {
       towers[i].removeEventListener("click", pickUpDisc);
@@ -45,6 +47,7 @@ function dropDisc(event) {
     towers[i].removeEventListener("click", dropDisc);
     towers[i].addEventListener("click", pickUpDisc);
   }
+  resetGrabCursor();
 }
 if (towerTwo.childElementCount === 4 || towerThree.childElementCount === 4) {
   function displayOnPage() {
@@ -65,3 +68,24 @@ function startOver() {
   location.reload()
 }
 }
+
+function resetGrabCursor() {
+  towers.forEach(function (tower) {
+    if (tower.childElementCount > 0) {
+      tower.style.cursor = "grab";
+    } else {
+      tower.style.cursor = "auto";
+    }
+  })
+ }
+ 
+ function setCursorToMove(discInHand) {
+  let sizeOfDiscInHand = parseInt(discInHand.dataset.size)
+  console.log("size Of Disc in hand: " + sizeOfDiscInHand)
+  towers.forEach(function (tower) {
+      tower.style.cursor = "move";
+    if (tower.childElementCount > 0 && sizeOfDiscInHand > parseInt(tower.lastElementChild.dataset.size)) {
+      tower.style.cursor = "not-allowed"
+    }
+  })
+ }
