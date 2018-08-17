@@ -1,5 +1,3 @@
-// // const (variable to keep track of which mode the player is in)
-// let playerHoldingDisc = false;
 
 const xLargeDisc = document.getElementById("xLargeDisc");
 const largeDisc = document.getElementById("largeDisc");
@@ -10,37 +8,8 @@ const towerOne = document.getElementById("startTower");
 const towerTwo = document.getElementById("offsetTower");
 const towerThree = document.getElementById("endTower");
 
-// towerOne.addEventListener("click", handleClick);
-// towerTwo.addEventListener("click", handleClick);
-// towerThree.addEventListener("click", handleClick);
-
-// // let playerHoldingDisc = [];
-
-
-// function handleClick(event) {
-//   const tower = event.target;
-//   removeDisc(tower);
-// }
-
-
-// function removeDisc(tower) {
-//   console.log("string_Disk", tower);
-//   if (playerHoldingDisc === false) {
-//     playerHoldingDisc.appendChild(tower);
-//   }
-
-//   if (playerHoldingDisc === true) {
-//     tower.appendChild(playerHoldingDisc);
-//   }
-
-// }
-
-// function placeDisc(tower) {
-//   console.log("Hello")
-// }
 
 const towers = [towerOne, towerTwo, towerThree];
-// let discInHand = [];
 
 towers.forEach(function (tower)
 
@@ -51,9 +20,8 @@ towers.forEach(function (tower)
 let discInHand = null
 
 function pickUpDisc(event) {
-  const tower = event.target
+  const tower = event.currentTarget
   if (tower.childElementCount > 0) {
-    // console.log(tower.lastElementChild)
     discInHand = tower.lastElementChild;
     tower.removeChild(discInHand)
     for (let i = 0; i < towers.length; i++) {
@@ -65,7 +33,7 @@ function pickUpDisc(event) {
 }
 
 function dropDisc(event) {
-  const tower = event.target
+  const tower = event.currentTarget
   let sizeOfTopDisc = 5;
   if (tower.childElementCount > 0) {
     sizeOfTopDisc = parseInt(tower.lastElementChild.dataset.size)
@@ -79,6 +47,14 @@ function dropDisc(event) {
     towers[i].addEventListener("click", pickUpDisc);
   }
 }
-  // tower.removeEventListener("click", dropDisc);
-  // tower.addEventListener("click", pickUpDisc);
+if (towerTwo.childElementCount === 0 || towerThree.childElementCount === 0) {
+  function displayOnPage() {
+    const message = document.createTextNode("You Win!");
+    const newP = document.createElement("p");
+    const destination = document.getElementById("whatever");
+    newP.appendChild(message);
+    destination.appendChild(newP);
+  }
+displayOnPage()
+}
 }
