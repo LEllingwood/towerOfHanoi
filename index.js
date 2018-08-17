@@ -28,7 +28,6 @@ function pickUpDisc(event) {
       towers[i].removeEventListener("click", pickUpDisc);
       towers[i].addEventListener("click", dropDisc);
     }
-
   }
 }
 
@@ -47,7 +46,7 @@ function dropDisc(event) {
     towers[i].addEventListener("click", pickUpDisc);
   }
 }
-if (towerTwo.childElementCount === 0 || towerThree.childElementCount === 0) {
+if (towerTwo.childElementCount === 4 || towerThree.childElementCount === 4) {
   function displayOnPage() {
     const message = document.createTextNode("You Win!");
     const newP = document.createElement("p");
@@ -56,5 +55,13 @@ if (towerTwo.childElementCount === 0 || towerThree.childElementCount === 0) {
     destination.appendChild(newP);
   }
 displayOnPage()
+}
+
+const refreshButton = document.getElementById("refresh");
+refreshButton.addEventListener("click", startOver);
+
+function startOver() {
+  console.log("message");
+  location.reload()
 }
 }
